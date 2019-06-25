@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { WIDTH_MD } from '../../util/Constants';
+import { connect } from 'react-redux';
 
 const SignedOutLinks = (props)=> {
     let navLinks = (
@@ -19,11 +21,22 @@ const SignedOutLinks = (props)=> {
         props.side ?
             navLinks
         : (
-            <ul className="right">
+            <ul className={`right ${props.windowWidth <= WIDTH_MD ? 'hide' : '' }`}>
                 {navLinks}
             </ul>
         )
     )
 }
+const mapStateToProps = (state) =>{
+    return {
+        windowWidth: state.window.width
+    }
+}
 
-export default SignedOutLinks;
+const mapDispatchToProps = (dispatch)=>{
+    return {
+    
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignedOutLinks);

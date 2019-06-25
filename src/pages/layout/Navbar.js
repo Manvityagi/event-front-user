@@ -7,6 +7,7 @@ import Media from "react-media";
 import M from 'materialize-css';
 import { updateDimensions } from '../../store/window';
 import { WIDTH_MD } from '../../util/Constants';
+import { NavbarPrimary, ButtonPrimary } from '../../util/Theme';
 class Navbar extends React.Component {
 
 	constructor(props) {
@@ -15,6 +16,7 @@ class Navbar extends React.Component {
 	}
 
 	componentDidMount() {
+		this.props.dispatch(updateDimensions(window.innerWidth, window.innerHeight));
 		window.addEventListener('resize', (e) => {
 			this.props.dispatch(updateDimensions(window.innerWidth, window.innerHeight));
 			console.log(window.innerWidth, window.innerHeight);
@@ -47,35 +49,40 @@ class Navbar extends React.Component {
 
 	render() {
 		return (
-			this.props.windowWidth <= WIDTH_MD ? (
+			
 			<React.Fragment>
-				<ul id="slide-out" className="sidenav yellow lighten-3">
-					<li>
-						<h3 className="center">
-							<Link className="brand-logo yellow darken-4" to="/" onClick={(e)=>this.closeSidebar(e)}>Events</Link>
-						</h3>	
+				<ul id="slide-out" className="sidenav yellow lighten-2">
+					<li className="blue center darken-3 ma0 pa2">
+						<div className="f2">
+							<Link className="white-text brand-logo" to="/" onClick={(e)=>this.closeSidebar(e)}>Events</Link>
+						</div>	
 					</li>
-					
 					<SignedInLinks side closeSidebar={this.closeSidebar}/>
 					<SignedOutLinks side closeSidebar={this.closeSidebar}/>
 				</ul>
-				<button 
-					onClick={() => { this.toggleSideNav() }} 
-					className="btn btn-floating btn-large waves-effect waves-light"
-				>
-						<i className="material-icons">menu</i>
-				</button>
 
-			</React.Fragment>	
-			):(
-				<nav className="nav-wrapper grey darken-3">
+				<nav className={`nav-wrapper ${NavbarPrimary} darken-3`}>
 					<div className="container">
-						<Link className="brand-logo left" to="/">Events</Link>
+						<Link 
+							className={`brand-logo ${this.props.windowWidth <= WIDTH_MD ? 'center' : 'left' }`} 
+							to="/"
+						>
+							Events
+						</Link>
+
+						<div
+							onClick={() => { this.toggleSideNav() }}
+							style={{paddingLeft: '10px'}} 
+							className={`${this.props.windowWidth <= WIDTH_MD ? '' : 'hide' } transparent white-text waves-effect waves-light`}
+						>
+								<i className="material-icons">menu</i>
+						</div>
 						<SignedInLinks />
 						<SignedOutLinks />
 					</div>
 				</nav>	
-			)
+			
+			</React.Fragment>
 		)
 	}
 }

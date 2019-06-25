@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from'react-router-dom';
 import { signUp } from '../../store/auth';
+import { ButtonPrimary } from '../../util/Theme';
 
 class SignUp extends Component {
     state = {
@@ -46,7 +47,7 @@ class SignUp extends Component {
                         <input name="password" type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                        <button className={`btn ${ButtonPrimary} white-text darken-3 z-depth-0`}>Sign Up</button>
                         <div className="red-text center">
                             {
                                 this.props.authError 

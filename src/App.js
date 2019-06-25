@@ -14,6 +14,7 @@ import EventDetail from './pages/events/EventDetail';
 import Navbar from './pages/layout/Navbar';
 import { withRouter } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
+import 'tachyons/css/tachyons.min.css';
 const store = createStore(
   rootReducer,
   applyMiddleware(
