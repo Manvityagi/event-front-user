@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './store/rootReducer.js';
@@ -13,7 +13,7 @@ import SignUp from './pages/auth/SignUp';
 import EventDetail from './pages/events/EventDetail';
 import Navbar from './pages/layout/Navbar';
 import { withRouter } from 'react-router-dom';
-
+import 'materialize-css/dist/css/materialize.min.css';
 const store = createStore(
   rootReducer,
   applyMiddleware(

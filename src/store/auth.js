@@ -19,12 +19,17 @@ export const signUp = (newUser) => {
 			...newUser
 		})
 		.then(res=>{
-		    console.log(res);
-		    dispatch({type: 'SIGNUP_SUCCESS'})
+			console.log(res);
+			//might need change depending on api response
+			if(res.status === 200){
+				dispatch({type: 'auth.userSignupSuccess'})
+			}else{
+				dispatch({type: 'auth.userSignupError', err: res.msg})	
+			}
 		})
 		.catch(err=>{
 		    console.log(err);
-		    dispatch({type: 'SIGNUP_ERROR', err})
+		    dispatch({type: 'auth.userSignupError', err})
 		})
 	}
 }
@@ -36,26 +41,31 @@ export const signIn = (credentials) => {
 			...credentials
 		})
 		.then(res=>{
-		    console.log(res);
-		    dispatch({type: 'LOGIN_SUCCESS'})
+			console.log(res);
+			//might need change depending on api response
+			if(res.status === 200){
+				dispatch({type: 'auth.userLoginSuccess'});
+			} else {
+				dispatch({type: 'auth.userLoginError', err: res.msg})
+			}
 		})
 		.catch(err=>{
 		    console.log(err);
-		    dispatch({type: 'LOGIN_ERROR', err})
+		    dispatch({type: 'auth.userLoginError', err})
 		})
 	}
 }
 
-export const signOut = (credentials) => {
+export const signOut = () => {
 	return (dispatch, getState) => {
 		storage.clear()
 		.then(res=>{
 		    console.log(res);
-		    dispatch({type: 'LOGOUT_SUCCESS'})
+		    dispatch({type: 'auth.signOutSuccess'})
 		})
 		.catch(err=>{
 		    console.log(err);
-		    dispatch({type: 'LOGOUT_ERROR', err})
+		    dispatch({type: 'auth.signOutError', err})
 		})
 	}
 }

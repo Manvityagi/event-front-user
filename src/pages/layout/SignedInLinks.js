@@ -2,26 +2,36 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { signOut } from '../../store/auth';
 import { connect } from 'react-redux';
+import Media from 'react-media';
 
 const SignedInLinks = (props)=> {
-    return (
-        <ul className="right">
+    let navLinks = (
+        <React.Fragment>
             <li>
-                <NavLink to='/'>
+                <NavLink to='/' onClick={(e)=>{props.closeSidebar && props.closeSidebar(e)}}>
                     About
                 </NavLink>
-                </li>
+            </li>
             <li>
-                <a  onClick={()=>{this.props.signOut()}}>
+                <a onClick={(e)=>{props.closeSidebar && props.closeSidebar(e); props.signOut()}}>
                     Log Out
                 </a>
             </li>
             <li>
-                <NavLink to='/' className="btn btn-floating pink lighten-1">
-                    'LJ'
+                <NavLink to='/' onClick={(e)=>{props.closeSidebar && props.closeSidebar(e)}}>
+                    Profile
                 </NavLink>
             </li>
-        </ul>
+        </React.Fragment>
+    );
+    return (
+        props.side ?
+            navLinks
+        : (
+            <ul className="right">
+                {navLinks}
+            </ul>
+        )
     )
 }
 const mapStateToProps = (state) =>{

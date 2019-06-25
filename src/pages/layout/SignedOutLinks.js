@@ -2,18 +2,27 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const SignedOutLinks = (props)=> {
-    return (
-        <ul className="right">
+    let navLinks = (
+        <React.Fragment>
             <li>
-                <NavLink to='/signup'>
+                <NavLink to='/signup' onClick={(e)=>{props.closeSidebar && props.closeSidebar(e)}}>
                     Sign Up
                 </NavLink>
                 </li>
             <li>
-                <NavLink to='/signin'>
+                <NavLink to='/signin' onClick={(e)=>{props.closeSidebar && props.closeSidebar(e)}}>
                     Log In
                 </NavLink></li>
-        </ul>
+        </React.Fragment>
+    );
+    return (
+        props.side ?
+            navLinks
+        : (
+            <ul className="right">
+                {navLinks}
+            </ul>
+        )
     )
 }
 
