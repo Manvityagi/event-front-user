@@ -12,13 +12,13 @@ const SignedInLinks = (props)=> {
                 </NavLink>
                 </li>
             <li>
-                <a  onClick={()=>{}}>
+                <a  onClick={()=>{this.props.signOut()}}>
                     Log Out
                 </a>
             </li>
             <li>
                 <NavLink to='/' className="btn btn-floating pink lighten-1">
-                    {props.profile.initials}
+                    'LJ'
                 </NavLink>
             </li>
         </ul>
@@ -32,7 +32,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch)=>{
     return {
-        // signOut: ()=>dispatch(signOut())
+        signOut: ()=>dispatch(signOut())
     }
 }
 
